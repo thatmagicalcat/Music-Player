@@ -18,6 +18,7 @@ public:
     void updateTime(std::chrono::milliseconds originalTime, std::chrono::milliseconds currentTime);
     void finishPlaying();
     void setMute(bool mute);
+    void refreshWindow();
 
     [[nodiscard]] bool isMute() const;
     [[nodiscard]] bool isPlaying() const;

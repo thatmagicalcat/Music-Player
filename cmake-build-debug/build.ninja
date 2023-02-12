@@ -77,6 +77,13 @@ build CMakeFiles/music_player.dir/src/Application.cpp.o: CXX_COMPILER__music_pla
   OBJECT_DIR = CMakeFiles/music_player.dir
   OBJECT_FILE_DIR = CMakeFiles/music_player.dir/src
 
+build CMakeFiles/music_player.dir/src/Settings.cpp.o: CXX_COMPILER__music_player_Debug /mnt/win/Code/Codings/C++/discord_tui/src/Settings.cpp || cmake_object_order_depends_target_music_player
+  DEP_FILE = CMakeFiles/music_player.dir/src/Settings.cpp.o.d
+  FLAGS = -g -fdiagnostics-color=always -std=gnu++20
+  INCLUDES = -I/mnt/win/Code/Codings/C++/discord_tui/include
+  OBJECT_DIR = CMakeFiles/music_player.dir
+  OBJECT_FILE_DIR = CMakeFiles/music_player.dir/src
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target music_player
@@ -85,7 +92,7 @@ build CMakeFiles/music_player.dir/src/Application.cpp.o: CXX_COMPILER__music_pla
 #############################################
 # Link the executable music_player
 
-build music_player: CXX_EXECUTABLE_LINKER__music_player_Debug CMakeFiles/music_player.dir/src/main.cpp.o CMakeFiles/music_player.dir/src/SideBar.cpp.o CMakeFiles/music_player.dir/src/BottomBar.cpp.o CMakeFiles/music_player.dir/src/Application.cpp.o
+build music_player: CXX_EXECUTABLE_LINKER__music_player_Debug CMakeFiles/music_player.dir/src/main.cpp.o CMakeFiles/music_player.dir/src/SideBar.cpp.o CMakeFiles/music_player.dir/src/BottomBar.cpp.o CMakeFiles/music_player.dir/src/Application.cpp.o CMakeFiles/music_player.dir/src/Settings.cpp.o
   FLAGS = -g
   LINK_LIBRARIES = -lvlc  -lncurses
   OBJECT_DIR = CMakeFiles/music_player.dir

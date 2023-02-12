@@ -8,7 +8,7 @@
 
 #include <ncurses.h>
 
-#define W_HEIGHT (LINES - 3)
+#define W_HEIGHT (LINES - 4)
 #define W_WIDTH COLS
 
 class SideBar {
@@ -21,6 +21,8 @@ public:
     void setFocus(bool b);
     void addItem(std::string item, std::string length);
     void moveSelector(Direction dir);
+    void refreshWindow();
+
     const std::string &getCurrentItem();
 
 private:

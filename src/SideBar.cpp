@@ -29,7 +29,7 @@ void SideBar::update() {
     wattroff(m_win, COLOR_PAIR(1));
 
     if (!m_focus) wattron(m_win, COLOR_PAIR(1));
-    mvwprintw(m_win, W_HEIGHT - 1, W_WIDTH / 2 - 2, "<s>");
+    mvwprintw(m_win, W_HEIGHT - 1, W_WIDTH / 2 - 2, "<b>");
     wattroff(m_win, COLOR_PAIR(1));
 
     // Print the menu
@@ -94,5 +94,9 @@ void SideBar::addItem(std::string item, std::string length) {
     m_vec.push_back(std::move(item));
     m_length.push_back(std::move(length));
 
+    update();
+}
+
+void SideBar::refreshWindow() {
     update();
 }

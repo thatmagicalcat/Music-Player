@@ -6,10 +6,13 @@
 #include <string>
 #include <unordered_map>
 #include <chrono>
+#include <iostream>
+#include <fstream>
 
 #include <ncurses.h>
 #include <vlcpp/vlc.hpp>
 
+#include "Settings.h"
 #include "SideBar.h"
 #include "BottomBar.h"
 

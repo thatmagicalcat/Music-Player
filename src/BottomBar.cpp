@@ -2,7 +2,7 @@
 
 BottomBar::BottomBar():
     m_mute(false),
-    m_win(newwin(3, COLS, LINES - 3, 0)),
+    m_win(newwin(3, COLS, LINES - 4, 0)),
     m_focus(false),
     m_isPlaying(false) {
 
@@ -86,4 +86,8 @@ void BottomBar::setMute(bool mute) {
 
 bool BottomBar::isMute() const {
     return m_mute;
+}
+
+void BottomBar::refreshWindow() {
+    update();
 }

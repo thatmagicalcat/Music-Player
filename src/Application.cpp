@@ -2,7 +2,14 @@
 
 namespace Application {
     void run() {
-        std::unordered_map<std::string, std::string> songMap;auto instance = VLC::Instance(0, nullptr);std::string songPath;auto *media = new VLC::Media(instance, "", VLC::Media::FromType::FromPath);auto *mediaPlayer = new VLC::MediaPlayer(*media);std::chrono::milliseconds mediaStart;
+        std::unordered_map<std::string, std::string> songMap;
+
+        auto instance = VLC::Instance(0, nullptr);
+        auto *media = new VLC::Media(instance, "", VLC::Media::FromType::FromPath);
+        auto *mediaPlayer = new VLC::MediaPlayer(*media);
+
+        std::chrono::milliseconds mediaStart;
+        std::string songPath;
 
         initscr();
         noecho();
@@ -14,6 +21,7 @@ namespace Application {
 
         // Used by SideBar.h and BottomBar.h
         init_pair(1, COLOR_RED, COLOR_BLACK);
+        init_pair(2, COLOR_BLACK, COLOR_YELLOW);
 
         SideBar sideBar;
         BottomBar bottomBar;
@@ -52,6 +60,13 @@ namespace Application {
             mediaPlayer -> play();
         };
 
+        const auto printHints = [&]() -> void {
+            attron(COLOR_PAIR(2));
+            mvprintw(LINES - 1, COLS / 2 - 8, " s ");
+            attroff(COLOR_PAIR(2));
+            mvprintw(LINES - 1, COLS / 2 - 4, "settings");
+        };
+
         const auto getLength = [&](const std::string &song_path) -> std::string {
             static auto tmp_instance = VLC::Instance(0, nullptr);
             auto tmp_media = VLC::Media(tmp_instance, song_path, VLC::Media::FromPath);
@@ -66,17 +81,31 @@ namespace Application {
             return std::to_string(minutes.count()) + ":" + std::to_string(seconds.count() % 60);
         };
 
-        for (const auto &entry : fs::directory_iterator("/home/wizard/Music")) {
-            if (!entry.is_directory() && isMusicFile(entry.path())) {
-                songMap[entry.path().filename().string()] = entry.path().string();
-                sideBar.addItem(entry.path().filename().string(), getLength(entry.path().string()));
+        std::ifstream in("path.txt");
+        std::string buffer;
+
+        while (std::getline(in, buffer)) {
+            if (!fs::exists(buffer)) {
+                endwin();
+                std::cerr << "Invalid path: '" << buffer << "'\n";
+            }
+
+            for (const auto &entry: fs::directory_iterator(buffer)) {
+                if (!entry.is_directory() && isMusicFile(entry.path())) {
+                    songMap[entry.path().filename().string()] = entry.path().string();
+                    sideBar.addItem(entry.path().filename().string(), getLength(entry.path().string()));
+                }
             }
         }
+
+        in.close();
 
         update_focus();
 
         int ch;
         while ((ch = getch()) != 'q') {
+            printHints();
+
             if (ch == KEY_UP) sideBar.moveSelector(SideBar::UP);
             else if (ch == KEY_DOWN) sideBar.moveSelector(SideBar::DOWN);
 
@@ -93,7 +122,7 @@ namespace Application {
                 playSong(songMap.at(sideBar.getCurrentItem()));
             }
 
-            else if (ch == 's' || ch == 'S') {
+            else if (ch == 'b' || ch == 'B') {
                 sideBar_focus = !sideBar_focus;
                 if (sideBar_focus) bottomBar_focus = false;
 
@@ -108,6 +137,20 @@ namespace Application {
             else if (ch == 'm' || ch == 'M') {
                 bottomBar.setMute(!bottomBar.isMute());
                 mediaPlayer -> setMute(bottomBar.isMute());
+            }
+
+            else if (ch == 's' || ch == 'S') {
+                clear();
+                printHints();
+
+                Settings s;
+
+                char chr;
+                while ((chr = getch()) != 's')
+                    if (chr == '\n') s.performAction();
+
+                sideBar.refreshWindow();
+                bottomBar.refreshWindow();
             }
 
             if (mediaPlayer -> isValid())
