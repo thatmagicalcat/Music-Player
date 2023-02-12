@@ -1,0 +1,9 @@
+# ninja log v5
+17	2243	1676127488260485400	CMakeFiles/music_player.dir/src/main.cpp.o	5b1ed6f3caf5140d
+3070	3425	1675994260422018000	discord_tui	1d349a26e4a861e8
+2774	2946	1675947072790516700	youtube_tui	8738eeec3f84d982
+23	804	1676127674441084900	CMakeFiles/music_player.dir/src/BottomBar.cpp.o	18b95c114dd34055
+3	13	0	clean	e556bb102b394cad
+804	931	1676127674567343600	music_player	fd0fde45625b3cc2
+5	828	1675994108735793500	CMakeFiles/discord_tui.dir/src/Request.cpp.o	bfbeb2a3d8fe119d
+13	1044	1676125428419094500	CMakeFiles/music_player.dir/src/SideBar.cpp.o	7f57185a8cf314b0

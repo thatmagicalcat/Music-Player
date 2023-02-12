@@ -1,0 +1,3 @@
+/mnt/win/Code/Codings/C++/discord_tui/cmake-build-debug/CMakeFiles/music_player.dir
+/mnt/win/Code/Codings/C++/discord_tui/cmake-build-debug/CMakeFiles/edit_cache.dir
+/mnt/win/Code/Codings/C++/discord_tui/cmake-build-debug/CMakeFiles/rebuild_cache.dir
